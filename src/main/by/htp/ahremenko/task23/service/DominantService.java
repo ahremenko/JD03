@@ -3,6 +3,7 @@ package by.htp.ahremenko.task23.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 2.3 Доминирующий элемент
@@ -26,24 +27,17 @@ public final class DominantService {
 
     public static Integer handle(List<Integer> list) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            int count = 1;
-            if (map.containsKey(list.get(i))) {
-                count = map.get(list.get(i)) + 1;
-            }
-            map.put(list.get(i), count);
+        for (int elem : list) {
+            map.put(elem, map.getOrDefault(elem,0) + 1);
         }
-        int max = 1;
-        Integer elem = null;
-        for (int i : map.keySet()) {
-            if (map.get(i) > max) {
-                max = map.get(i);
-                elem = i;
+        Map.Entry<Integer, Integer> maxPair = null;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet())
+        {
+            if (maxPair == null || entry.getValue().compareTo(maxPair.getValue()) > 0)
+            {
+                maxPair = entry;
             }
         }
-        if (max > list.size() / 2) {
-            return elem;
-        }
-        return null;
+        return maxPair.getKey();
     }
 }

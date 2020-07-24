@@ -13,7 +13,7 @@ public class DominantServiceTest {
 
     @Test
     public void handle() {
-        List<Integer> list = new ArrayList<>(Arrays.asList(10, 9, 9, 10, 9));
+        List<Integer> list = Arrays.asList(10, 9, 9, 10, 9);
         int actual = DominantService.handle(list);
         int expected = 9;
         assertEquals(expected, actual);
@@ -21,17 +21,9 @@ public class DominantServiceTest {
 
     @Test
     public void handle2() {
-        List<Integer> list = new ArrayList<>(Arrays.asList(2, 2, 1, 1, 2, 2, 3));
+        List<Integer> list = Arrays.asList(2, 2, 1, 1, 2, 2, 3);
         int actual = DominantService.handle(list);
         int expected = 2;
         assertEquals(expected, actual);
     }
-
-    @Test
-    public void handleNoDominant() {
-        List<Integer> list = new ArrayList<>(Arrays.asList(2, 2, 1, 1, 4, 4));
-        Integer actual = DominantService.handle(list);
-        assertNull(actual);
-    }
-
 }
