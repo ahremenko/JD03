@@ -1,8 +1,6 @@
 package by.htp.ahremenko.task24.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 2.4 Сортировка массива
@@ -21,20 +19,20 @@ public final class SortOddOnly {
 
     public static List<Integer> handle(List<Integer> list) {
         List<Integer> sortedList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) % 2 == 1) {
-                sortedList.add(list.get(i));
+        for (int element : list) {
+            if (element % 2 == 1) {
+                sortedList.add(element);
             }
         }
         Collections.sort(sortedList);
+        Queue<Integer> oddElements = new LinkedList<>();
+        sortedList.forEach(element -> oddElements.add(element));
         List<Integer> resultList = new ArrayList<>();
-        int j = 0;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) % 2 == 1) {
-                resultList.add(sortedList.get(j));
-                j++;
+        for (int element : list) {
+            if (element % 2 == 1) {
+                resultList.add(oddElements.poll());
             } else {
-                resultList.add(list.get(i));
+                resultList.add(element);
             }
         }
         return resultList;
