@@ -39,6 +39,7 @@ public class BracketsService {
                     }
                 }
             }
+
         } catch (NoSuchElementException e) {
             return false;
         }
