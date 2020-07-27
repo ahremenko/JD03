@@ -7,8 +7,11 @@
 Задание 1.4: UnitedListTest.java
 
 2-nd week tasks:
-Задание 2.1: BracketsServiceTest.java
-Задание 2.2: AnagramServiceTest.java
-Задание 2.3: DominantServiceTest.java
-Задание 2.4: SortOddOnlyTest.java
+Задание 2.1: test.by.htp.ahremenko.task21.service.BracketsServiceTest.java
+Задание 2.2: test.by.htp.ahremenko.task22.service.AnagramServiceTest.java
+Задание 2.3: test.by.htp.ahremenko.task23.service.DominantServiceTest.java
+Задание 2.4: test.by.htp.ahremenko.task24.service.SortOddOnlyTest.java
+
+3-rd week tasks:
+Задание 3.1: test.by.htp.ahremenko.task31.service.TreeServiceTest.java
 
