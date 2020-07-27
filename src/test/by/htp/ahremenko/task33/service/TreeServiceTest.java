@@ -5,6 +5,20 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ *   Тестируем на примере дерева след. вида:
+ *
+ *          d
+ *        |    \
+ *      s        g
+ *    |  \        \
+ *   a    e        t
+ *       | \      | \
+ *      f   m    k   r
+ *           \
+ *            n
+ *
+ */
 public class TreeServiceTest {
 
     public TreeNode root = new TreeNode("d",
