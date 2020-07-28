@@ -1,11 +1,10 @@
 package by.htp.ahremenko.task33.domain;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor
 public class TreeNode<T> {
 
     @Getter
