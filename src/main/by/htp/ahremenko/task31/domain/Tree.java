@@ -1,30 +1,24 @@
 package by.htp.ahremenko.task31.domain;
 
-public class Tree {
-    private Object value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
+
+@AllArgsConstructor
+public class Tree<T> {
+
+    @Getter
+    @NonNull
+    private T value;
+
+    @Getter
     private Tree left;
+
+    @Getter
     private Tree right;
 
-    public Tree(Object value, Tree left, Tree right) {
+    public Tree(T value) {
         this.value = value;
-        this.left = left;
-        this.right = right;
-    }
-
-    public Tree(Object value) {
-        this.value = value;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public Tree getLeft() {
-        return left;
-    }
-
-    public Tree getRight() {
-        return right;
     }
 
     public int calcNodes() {
