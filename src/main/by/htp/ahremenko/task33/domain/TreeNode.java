@@ -1,22 +1,22 @@
 package by.htp.ahremenko.task33.domain;
 
-public class TreeNode {
+public class TreeNode<T> {
 
-    private Object value;
+    private T value;
     private TreeNode left;
     private TreeNode right;
 
-    public TreeNode(Object value, TreeNode left, TreeNode right) {
+    public TreeNode(T value, TreeNode left, TreeNode right) {
         this.value = value;
         this.left = left;
         this.right = right;
     }
 
-    public TreeNode(Object value) {
+    public TreeNode(T value) {
         this.value = value;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return value;
     }
 
@@ -57,5 +57,4 @@ public class TreeNode {
         }
         builder.append(value.toString());
     }
-
 }
