@@ -3,39 +3,40 @@ package by.htp.ahremenko.task34.service;
 import by.htp.ahremenko.task34.domain.TreeNode;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
- *   Тестируем на примере дерева след. вида:
- *
- *          d
- *        |    \
- *      s        g
- *    |  \        \
- *   a    e        t
- *       | \      | \
- *      f   m    k   r
- *           \
- *            n
- *
+ * Тестируем на примере дерева след. вида:
+ * ..................
+ * ....d.............
+ * ..|....\..........
+ * .s........g.......
+ * |..\........\.....
+ * a....e........t...
+ * ....|.\......|.\..
+ * ...f...m....k...r.
+ * .......\..........
+ * ........n.........
+ * ..................
  */
 public class TreeServiceTest {
-    public TreeNode root = new TreeNode("d",
-            new TreeNode("s",
-                    new TreeNode("a"),
-                    new TreeNode("e",
-                            new TreeNode("f"),
-                            new TreeNode("m",
+
+    private TreeNode<String> root = new TreeNode("d",
+            new TreeNode<>("s",
+                    new TreeNode<>("a"),
+                    new TreeNode<>("e",
+                            new TreeNode<>("f"),
+                            new TreeNode<>("m",
                                     null,
-                                    new TreeNode("n")
+                                    new TreeNode<>("n")
                             )
                     )
             ),
-            new TreeNode("g",
+            new TreeNode<>("g",
                     null,
-                    new TreeNode("t",
-                            new TreeNode("k"),
-                            new TreeNode("r")
+                    new TreeNode<>("t",
+                            new TreeNode<>("k"),
+                            new TreeNode<>("r")
                     )
             )
     );
