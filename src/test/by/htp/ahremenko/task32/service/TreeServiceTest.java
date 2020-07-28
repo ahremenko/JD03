@@ -3,26 +3,40 @@ package by.htp.ahremenko.task32.service;
 import by.htp.ahremenko.task32.domain.Tree;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * Тестируем на примере дерева след. вида:
+ * .....................
+ * ....7................
+ * ..|....\.............
+ * .2........13.........
+ * |..\........\........
+ * 8....4.........12....
+ * ....|.\.......|...\..
+ * ...6...21....24...48.
+ * .......\.............
+ * ........1............
+ * .....................
+ */
 public class TreeServiceTest {
 
-    public Tree root = new Tree(new Integer(7),
-            new Tree(new Integer(2),
-                    new Tree(new Integer(8)),
-                    new Tree(new Integer(4),
-                            new Tree(new Integer(6)),
-                            new Tree(new Integer(21),
+    private Tree<Integer> root = new Tree<>(7,
+            new Tree<>(2,
+                    new Tree<>(8),
+                    new Tree<>(4,
+                            new Tree<>(6),
+                            new Tree<>(21,
                                     null,
-                                    new Tree(new Integer(1))
+                                    new Tree<>(1)
                             )
                     )
             ),
-            new Tree(new Integer(13),
+            new Tree<>(13,
                     null,
-                    new Tree(new Integer(12),
-                            new Tree(new Integer(24)),
-                            new Tree(new Integer(48))
+                    new Tree<>(12,
+                            new Tree<>(24),
+                            new Tree<>(48)
                     )
             )
     );
