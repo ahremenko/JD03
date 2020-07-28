@@ -1,31 +1,25 @@
 package by.htp.ahremenko.task33.domain;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
+
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class TreeNode<T> {
 
+    @Getter
+    @NonNull
     private T value;
-    private TreeNode left;
-    private TreeNode right;
 
-    public TreeNode(T value, TreeNode left, TreeNode right) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
-    }
+    @Getter
+    private TreeNode left;
+
+    @Getter
+    private TreeNode right;
 
     public TreeNode(T value) {
         this.value = value;
-    }
-
-    public T getValue() {
-        return value;
-    }
-
-    public TreeNode getLeft() {
-        return left;
-    }
-
-    public TreeNode getRight() {
-        return right;
     }
 
     public void preOrder(StringBuilder builder) {
