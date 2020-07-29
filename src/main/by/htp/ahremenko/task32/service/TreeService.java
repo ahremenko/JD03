@@ -3,6 +3,8 @@ package by.htp.ahremenko.task32.service;
 import by.htp.ahremenko.task32.domain.Tree;
 import lombok.experimental.UtilityClass;
 
+import java.util.Optional;
+
 /**
  * 3.2 Глубина бинарного дерева (DFS)
  * Дана структура данных с первого задания.
@@ -12,10 +14,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TreeService {
 
-    public static int getTreeHeight(Tree tree) {
-        if (tree == null)
-            return 0;
-        int maxHeight = 0;
-        return tree.getHeight();
+    public static int getTreeHeight(Tree<Integer> tree) {
+        return Optional.ofNullable(tree) .map(Tree:: getHeight) .orElse(0);
     }
 }

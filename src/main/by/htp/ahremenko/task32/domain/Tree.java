@@ -5,17 +5,14 @@ import lombok.Getter;
 import lombok.NonNull;
 
 @AllArgsConstructor
+@Getter
 public class Tree<T> {
 
-    @Getter
     @NonNull
     private T value;
 
-    @Getter
-    private Tree left;
-
-    @Getter
-    private Tree right;
+    private Tree<T> left;
+    private Tree<T> right;
 
     public Tree(T value) {
         this.value = value;
