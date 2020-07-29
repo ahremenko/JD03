@@ -1,21 +1,18 @@
 package by.htp.ahremenko.task34.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NonNull;
 
 @AllArgsConstructor
+@Data
 public class TreeNode<T> {
 
-    @Getter
     @NonNull
     private T value;
 
-    @Getter
-    private TreeNode left;
-
-    @Getter
-    private TreeNode right;
+    private TreeNode<T> left;
+    private TreeNode<T> right;
 
     public TreeNode(T value) {
         this.value = value;

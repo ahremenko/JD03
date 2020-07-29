@@ -3,7 +3,7 @@ package by.htp.ahremenko.task34.service;
 import by.htp.ahremenko.task34.domain.TreeNode;
 import lombok.experimental.UtilityClass;
 
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
@@ -24,12 +24,11 @@ public class TreeService {
         if (tree == null) {
             return "";
         }
-        Queue<TreeNode> queue = new LinkedList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         queue.add(tree);
         StringBuilder builder = new StringBuilder();
 
         while (!queue.isEmpty()) {
-
             TreeNode node = queue.peek();
             if (node != null) {
                 builder.append(node.getValue().toString());
