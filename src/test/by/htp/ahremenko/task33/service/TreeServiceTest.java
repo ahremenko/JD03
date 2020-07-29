@@ -43,21 +43,21 @@ public class TreeServiceTest {
 
     @Test
     public void getTraversalInOrder() {
-        String actual = TreeService.getTraversalInOrder(root);
+        String actual = TreeService.getTraversalInOrder(root).toString();
         String expected = "asfemndgktr";
         assertEquals(expected, actual);
     }
 
     @Test
     public void getTraversalPreOrder() {
-        String actual = TreeService.getTraversalPreOrder(root);
+        String actual = TreeService.getTraversalPreOrder(root).toString();
         String expected = "dsaefmngtkr";
         assertEquals(expected, actual);
     }
 
     @Test
     public void getTraversalPostOrder() {
-        String actual = TreeService.getTraversalPostOrder(root);
+        String actual = TreeService.getTraversalPostOrder(root).toString();
         String expected = "afnmeskrtgd";
         assertEquals(expected, actual);
     }
