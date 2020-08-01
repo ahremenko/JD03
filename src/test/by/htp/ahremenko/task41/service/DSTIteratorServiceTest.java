@@ -3,7 +3,7 @@ package by.htp.ahremenko.task41.service;
 import by.htp.ahremenko.common.TreeNode;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Тестируем на примере дерева след. вида:
