@@ -59,4 +59,26 @@ public class DSTIteratorServiceTest {
         String expected = "dsgaetfmkrn";
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void handle2DFSStrategy() throws IllegalAccessException, InstantiationException {
+        DepthFirstSearchStrategy<String> searchStrategy = DepthFirstSearchStrategy.getInstance(DepthFirstSearchStrategy.class);
+        String actual = dSTIteratorService.handle2(searchStrategy, root.getLeft());
+        String expected = "saefmn";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testDFSSingletones() throws IllegalAccessException, InstantiationException {
+        DepthFirstSearchStrategy<String> searchStrategy = DepthFirstSearchStrategy.getInstance(DepthFirstSearchStrategy.class);
+        DepthFirstSearchStrategy<String> searchStrategy2 = DepthFirstSearchStrategy.getInstance(DepthFirstSearchStrategy.class);
+        assertEquals(searchStrategy, searchStrategy2);
+    }
+
+    @Test
+    public void testBFSSingletones() throws IllegalAccessException, InstantiationException {
+        BreadthFirstSearchStrategy<String> searchStrategy = BreadthFirstSearchStrategy.getInstance(BreadthFirstSearchStrategy.class);
+        BreadthFirstSearchStrategy<String> searchStrategy2 = BreadthFirstSearchStrategy.getInstance(BreadthFirstSearchStrategy.class);
+        assertEquals(searchStrategy, searchStrategy2);
+    }
 }
