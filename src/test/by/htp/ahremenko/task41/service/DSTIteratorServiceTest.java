@@ -1,6 +1,8 @@
 package by.htp.ahremenko.task41.service;
 
 import by.htp.ahremenko.common.TreeNode;
+import by.htp.ahremenko.task41.BreadthFirstSearchStrategy;
+import by.htp.ahremenko.task41.DepthFirstSearchStrategy;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -43,15 +45,17 @@ public class DSTIteratorServiceTest {
     );
 
     @Test
-    public void handleDFSStrategy() {
-        String actual = dSTIteratorService.handleDFSStrategy(root);
+    public void handleDFSStrategy() throws IllegalAccessException, InstantiationException {
+        DepthFirstSearchStrategy<String> searchStrategy = DepthFirstSearchStrategy.getInstance(DepthFirstSearchStrategy.class);
+        String actual = dSTIteratorService.handle(searchStrategy, root);
         String expected = "dsaefmngtkr";
         assertEquals(expected, actual);
     }
 
     @Test
-    public void handleBFSStrategy() {
-        String actual = dSTIteratorService.handleBFSStrategy(root);
+    public void handleBFSStrategy() throws IllegalAccessException, InstantiationException {
+        BreadthFirstSearchStrategy<String> searchStrategy = BreadthFirstSearchStrategy.getInstance(BreadthFirstSearchStrategy.class);
+        String actual = dSTIteratorService.handle(searchStrategy, root);
         String expected = "dsgaetfmkrn";
         assertEquals(expected, actual);
     }

@@ -1,15 +1,19 @@
 package by.htp.ahremenko.task41;
 
+import by.htp.ahremenko.common.TreeNode;
+
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SearchStrategy {
-    private static final SearchStrategy instance = new SearchStrategy();
+public class BreadthFirstSearchStrategy<T> implements Strategy<T> {
+
+    private static final BreadthFirstSearchStrategy instance = new BreadthFirstSearchStrategy();
 
     @SuppressWarnings( "rawtypes")
     private Map<Class,Object> mapHolder = new HashMap<>();
 
-    private SearchStrategy() {}
+    private BreadthFirstSearchStrategy() {}
 
     @SuppressWarnings("unchecked")
     public static <T> T getInstance(Class<T> classOf) throws InstantiationException, IllegalAccessException {
@@ -25,5 +29,18 @@ public class SearchStrategy {
 
     public Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException();
+    }
+
+    @Override
+    public T next(Deque<TreeNode<T>> stack) {
+        TreeNode<T> node = stack.removeLast();
+        T result = node.getValue();
+        if (node.getLeft() != null) {
+            stack.addFirst(node.getLeft());
+        }
+        if (node.getRight() != null) {
+            stack.addFirst(node.getRight());
+        }
+        return result;
     }
 }

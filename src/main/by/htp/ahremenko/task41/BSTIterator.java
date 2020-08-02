@@ -1,8 +1,6 @@
 package by.htp.ahremenko.task41;
 
 import by.htp.ahremenko.common.TreeNode;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -32,18 +30,14 @@ import static java.util.Objects.nonNull;
  *
  * @param <T> - type of TreeNode
  */
-public class BSTIterator<T> implements Iterator {
+public class BSTIterator<T> implements Iterator<T> {
 
-    private Deque<TreeNode<T>> stack;
+    private Deque<TreeNode<T>> stack = new ArrayDeque<>();
+    private Strategy<T> strategy;
 
-    @Setter
-    private SearchStrategy<T> searchStrategy;
-
-    public BSTIterator(TreeNode<T> root) {
-        stack = new ArrayDeque<>();
-        if (nonNull(root)) {
-            stack.addFirst(root);
-        }
+    public BSTIterator(Strategy<T> strategy, TreeNode<T> root) {
+        this.strategy = strategy;
+        stack.addFirst(root);
     }
 
     @Override
@@ -51,7 +45,8 @@ public class BSTIterator<T> implements Iterator {
         return !stack.isEmpty();
     }
 
+    @Override
     public T next() {
-        return searchStrategy.next(stack);
+        return strategy.next(stack);
     }
 }
