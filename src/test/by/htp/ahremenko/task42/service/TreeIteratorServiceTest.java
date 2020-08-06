@@ -1,6 +1,7 @@
 package by.htp.ahremenko.task42.service;
 
 import by.htp.ahremenko.common.TreeNode;
+import by.htp.ahremenko.task41.BreadthFirstSearchStrategy;
 import by.htp.ahremenko.task41.DepthFirstSearchStrategy;
 import by.htp.ahremenko.task42.domain.Student;
 import org.junit.Test;
@@ -61,4 +62,13 @@ public class TreeIteratorServiceTest {
         List<Integer> expectedList = Arrays.asList(7,9,10,10,3,7,6,7,4,3,8,5,3,7,7,8,9,8,6,7);
         assertEquals(expectedList, actualList);
     }
+
+    @Test
+    public void handleAllMarkAsPercent() throws IllegalAccessException, InstantiationException {
+        BreadthFirstSearchStrategy<Student> searchStrategy = BreadthFirstSearchStrategy.getInstance(BreadthFirstSearchStrategy.class);
+        List<Integer> actualList = treeIteratorService.handleAllMarkAsPercent(searchStrategy, root.getRight());
+        List<Integer> expectedList = Arrays.asList(70,80,90,80,60,70);
+        assertEquals(expectedList, actualList);
+    }
+
 }

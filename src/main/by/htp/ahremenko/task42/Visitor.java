@@ -4,5 +4,5 @@ import by.htp.ahremenko.task42.domain.Student;
 
 public interface Visitor {
 
-    public void visitStudent(Student student);
+    void visitStudent(Student student);
 }
