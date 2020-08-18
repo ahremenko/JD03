@@ -7,8 +7,6 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
-
-
 /**
  * 4.1 Tree Iterator
  * Для обхода любой структуры данных используется знаменитый паттерн проектирования

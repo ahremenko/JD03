@@ -10,7 +10,7 @@ public class DepthFirstSearchStrategy<T> implements Strategy<T> {
 
     private static final DepthFirstSearchStrategy instance = new DepthFirstSearchStrategy();
 
-    @SuppressWarnings( "rawtypes")
+    //@SuppressWarnings( "rawtypes")
     private Map<Class,Object> mapHolder = new HashMap<>();
 
     private DepthFirstSearchStrategy() {}
@@ -27,9 +27,9 @@ public class DepthFirstSearchStrategy<T> implements Strategy<T> {
         }
     }
 
-    public Object clone() throws CloneNotSupportedException {
+    /*public Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException();
-    }
+    }*/
 
     @Override
     public T next(Deque<TreeNode<T>> stack) {
