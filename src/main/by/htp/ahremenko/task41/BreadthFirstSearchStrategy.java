@@ -10,26 +10,26 @@ public class BreadthFirstSearchStrategy<T> implements Strategy<T> {
 
     private static final BreadthFirstSearchStrategy instance = new BreadthFirstSearchStrategy();
 
-    @SuppressWarnings( "rawtypes")
-    private Map<Class,Object> mapHolder = new HashMap<>();
+    private Map<Class, Object> mapHolder = new HashMap<>();
 
-    private BreadthFirstSearchStrategy() {}
+    private BreadthFirstSearchStrategy() {
+    }
 
     @SuppressWarnings("unchecked")
     public static <T> T getInstance(Class<T> classOf) throws InstantiationException, IllegalAccessException {
 
-        synchronized(instance){
-            if(!instance.mapHolder.containsKey(classOf)){
+        synchronized (instance) {
+            if (!instance.mapHolder.containsKey(classOf)) {
                 T obj = classOf.newInstance();
                 instance.mapHolder.put(classOf, obj);
             }
-            return (T)instance.mapHolder.get(classOf);
+            return (T) instance.mapHolder.get(classOf);
         }
     }
 
-    public Object clone() throws CloneNotSupportedException {
+    /*public Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException();
-    }
+    }*/
 
     @Override
     public T next(Deque<TreeNode<T>> stack) {

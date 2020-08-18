@@ -18,7 +18,7 @@ public class DSTIteratorService {
     public String handle2(Strategy<String> strategy, TreeNode<String> root) {
         StringBuilder builder = new StringBuilder();
         BSTIterator<String> iterator = new BSTIterator<>(strategy, root);
-        iterator.forEachRemaining( elem -> builder.append(elem));
+        iterator.forEachRemaining(elem -> builder.append(elem));
         return builder.toString();
     }
 

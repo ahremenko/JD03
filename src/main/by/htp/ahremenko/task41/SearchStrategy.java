@@ -6,7 +6,7 @@ import java.util.Map;
 public class SearchStrategy {
     private static final SearchStrategy instance = new SearchStrategy();
 
-    @SuppressWarnings( "rawtypes")
+    //@SuppressWarnings( "rawtypes")
     private Map<Class,Object> mapHolder = new HashMap<>();
 
     private SearchStrategy() {}
@@ -23,7 +23,7 @@ public class SearchStrategy {
         }
     }
 
-    public Object clone() throws CloneNotSupportedException {
+    /*public Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException();
-    }
+    }*/
 }

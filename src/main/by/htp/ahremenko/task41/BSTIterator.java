@@ -1,13 +1,11 @@
 package by.htp.ahremenko.task41;
 
 import by.htp.ahremenko.common.TreeNode;
-import com.sun.istack.internal.NotNull;
+import lombok.NonNull;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
-
-import static java.util.Objects.nonNull;
 
 /**
  * 4.1 Tree Iterator
@@ -36,7 +34,7 @@ public class BSTIterator<T> implements Iterator<T> {
     private Deque<TreeNode<T>> stack = new ArrayDeque<>();
     private Strategy<T> strategy;
 
-    public BSTIterator(@NotNull Strategy<T> strategy, @NotNull TreeNode<T> root) {
+    public BSTIterator(@NonNull Strategy<T> strategy, @NonNull TreeNode<T> root) {
         this.strategy = strategy;
         stack.addFirst(root);
     }
