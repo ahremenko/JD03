@@ -8,10 +8,9 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @Data
 @AllArgsConstructor
-public class Student implements Visitable {
+public class Student implements Visitable<Visitor> {
 
     private String name;
     private int courseNumber;

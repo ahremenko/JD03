@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentMarksVisitor implements Visitor {
+public class StudentMarksVisitor implements Visitor<Student> {
     @Getter
     private List<Integer> list = new ArrayList<>();
 

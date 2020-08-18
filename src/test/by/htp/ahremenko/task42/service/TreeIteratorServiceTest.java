@@ -44,31 +44,47 @@ public class TreeIteratorServiceTest {
     );
 
     @Test
-    public void handleMaxCourse() throws IllegalAccessException, InstantiationException {
-        DepthFirstSearchStrategy<Student> searchStrategy = DepthFirstSearchStrategy.getInstance(DepthFirstSearchStrategy.class);
-        List<Integer> allCourses = treeIteratorService.handleMaxCourse(searchStrategy, root);
-        Integer actual = allCourses
-                .stream()
-                .mapToInt(v -> v)
-                .max().orElseThrow(NoSuchElementException::new);
-        Integer expected = 4;
-        assertEquals(expected, actual);
+    public void handleMaxCourse() {
+        try {
+            var searchStrategy = DepthFirstSearchStrategy.getInstance(DepthFirstSearchStrategy.class);
+            List<Integer> allCourses = treeIteratorService.handleMaxCourse(searchStrategy, root);
+            Integer actual = allCourses
+                    .stream()
+                    .mapToInt(v -> v)
+                    .max()
+                    .orElseThrow(NoSuchElementException::new);
+            Integer expected = 4;
+            assertEquals(expected, actual);
+        } catch (NoSuchElementException | InstantiationException | IllegalAccessException e) {
+            //TODO: remove it!!!
+            assertEquals(true, false);
+        }
     }
 
     @Test
-    public void handleAllMark() throws IllegalAccessException, InstantiationException {
-        DepthFirstSearchStrategy<Student> searchStrategy = DepthFirstSearchStrategy.getInstance(DepthFirstSearchStrategy.class);
-        List<Integer> actualList = treeIteratorService.handleAllMark(searchStrategy, root);
-        List<Integer> expectedList = Arrays.asList(7,9,10,10,3,7,6,7,4,3,8,5,3,7,7,8,9,8,6,7);
-        assertEquals(expectedList, actualList);
+    public void handleAllMark() {
+        try {
+            var searchStrategy = DepthFirstSearchStrategy.getInstance(DepthFirstSearchStrategy.class);
+            List<Integer> actualList = treeIteratorService.handleAllMark(searchStrategy, root);
+            List<Integer> expectedList = Arrays.asList(7,9,10,10,3,7,6,7,4,3,8,5,3,7,7,8,9,8,6,7);
+            assertEquals(expectedList, actualList);
+        } catch (NoSuchElementException | InstantiationException | IllegalAccessException e) {
+            //TODO: remove it!!!
+            assertEquals(true, false);
+        }
     }
 
     @Test
-    public void handleAllMarkAsPercent() throws IllegalAccessException, InstantiationException {
-        BreadthFirstSearchStrategy<Student> searchStrategy = BreadthFirstSearchStrategy.getInstance(BreadthFirstSearchStrategy.class);
-        List<Integer> actualList = treeIteratorService.handleAllMarkAsPercent(searchStrategy, root.getRight());
-        List<Integer> expectedList = Arrays.asList(70,80,90,80,60,70);
-        assertEquals(expectedList, actualList);
+    public void handleAllMarkAsPercent() {
+        try {
+            var searchStrategy = BreadthFirstSearchStrategy.getInstance(BreadthFirstSearchStrategy.class);
+            List<Integer> actualList = treeIteratorService.handleAllMarkAsPercent(searchStrategy, root.getRight());
+            List<Integer> expectedList = Arrays.asList(70,80,90,80,60,70);
+            assertEquals(expectedList, actualList);
+        } catch (NoSuchElementException | InstantiationException | IllegalAccessException e) {
+            //TODO: remove it!!!
+            assertEquals(true, false);
+        }
     }
 
 }
