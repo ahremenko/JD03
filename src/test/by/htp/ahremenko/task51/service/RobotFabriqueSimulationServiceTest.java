@@ -38,4 +38,10 @@ public class RobotFabriqueSimulationServiceTest extends TestCase {
         boolean actual = robot.isPartSuitable(new BodyPart(BodyType.HEAD));
         assertEquals(false, actual);
     }
+
+    public void testHandle() {
+        Integer actual = RobotFabriqueSimulationService.handle();
+        System.out.println("actual = " + actual);
+        assertNotNull(actual);
+    }
 }

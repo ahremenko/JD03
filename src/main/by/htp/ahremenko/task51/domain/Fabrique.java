@@ -1,19 +1,20 @@
 package by.htp.ahremenko.task51.domain;
 
 import by.htp.ahremenko.task51.service.RobotFabriqueSimulationService;
+import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-public class Fabrique extends Thread {
+public class Fabrique implements Runnable {
 
     private static volatile Fabrique instance;
 
     private List<Part> allParts = new ArrayList<>();
     private Random random = new Random();
-    private volatile List<Part> enabledParts = new LinkedList<>();
+    private volatile Queue<Part> enabledParts = new LinkedList<>();
+
+    @Getter
+    private List<Assistant> assistants = new ArrayList<>();
 
     {
         BodyType[] bodyPartTypes = BodyType.values();
@@ -47,6 +48,7 @@ public class Fabrique extends Thread {
         for (int i = 0; i < amount; i++) {
             result.add(getRandomPart());
         }
+        System.out.println("Fabrique generates " + result.size() + " parts.");
         return result;
     }
 
@@ -54,15 +56,29 @@ public class Fabrique extends Thread {
         return allParts.get(random.nextInt(allParts.size()));
     }
 
+    public synchronized List<Part> gatherParts(int count) {
+        List<Part> result = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            result.add(enabledParts.remove());
+        }
+        return result;
+    }
+
     @Override
     public void run() {
+        //Random random = new Random();
         for (int i = 0; i < RobotFabriqueSimulationService.MAX_PERIODS; i++) {
+            System.out.println("i=" + i);
             enabledParts.addAll(generateParts(null));
-            try {
-                Thread.sleep(RobotFabriqueSimulationService.NIGHT_DURATION_MS);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(100L);
+        }
+    }
+
+    private void sleep(long ms){
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
