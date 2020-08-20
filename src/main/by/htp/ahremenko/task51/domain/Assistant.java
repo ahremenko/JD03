@@ -1,6 +1,5 @@
 package by.htp.ahremenko.task51.domain;
 
-import by.htp.ahremenko.task51.service.RobotFabriqueSimulationService;
 import lombok.Getter;
 
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.ArrayList;
 
-public class Assistant implements Runnable {
+public class Assistant {
     @Getter
     private String assistantName;
 
@@ -24,12 +23,13 @@ public class Assistant implements Runnable {
         this.assistantName = name;
     }
 
-    public void addParts(List<Part> newParts) {
+    public void gatherAndTry(List<Part> newParts) {
         parts.addAll(newParts);
         System.out.println("Assistant [" + assistantName + "] gathered " + newParts.size() + " parts: " + newParts);
+        tryToMakeRobots();
     }
 
-    public void tryToMakeRobots() {
+    private void tryToMakeRobots() {
         ListIterator<Part> iterator = parts.listIterator();
         while (iterator.hasNext()) {
             Part part = iterator.next();
@@ -47,24 +47,5 @@ public class Assistant implements Runnable {
 
     public int getAmountFinishedRobots() {
         return robotsFinished.size();
-    }
-
-    @Override
-    public void run() {
-        Fabrique fabrique = Fabrique.getInstance();
-        for (int i = 0; i < RobotFabriqueSimulationService.MAX_PERIODS; i++) {
-            addParts(fabrique.gatherParts(random.nextInt(RobotFabriqueSimulationService.MAX_GENERATED_PARTS) + 1));
-            tryToMakeRobots();
-            //System.out.println("Assistant [" + assistantName + "]: parts: " + parts + ", robotInProcess: " + robotInProcess + ", robotsFinished: " + robotsFinished.size());
-            sleep(RobotFabriqueSimulationService.NIGHT_DURATION_MS);
-        }
-    }
-
-    private void sleep(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

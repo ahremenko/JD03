@@ -3,6 +3,10 @@ package by.htp.ahremenko.task51.service;
 import by.htp.ahremenko.task51.domain.Fabrique;
 import by.htp.ahremenko.task51.domain.Assistant;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 5.1 Фабрика роботов
  * Двое безумных учёных устроили соревнование, кто из них соберёт больше роботов за 100 ночей.
@@ -36,18 +40,14 @@ public class RobotFabriqueSimulationService {
 
     public static String handle() {
         Fabrique fabrique = Fabrique.getInstance();
-        Assistant assistant1 = new Assistant("Vasya");
+
+        Assistant assistant1 = new Assistant("Vasya");  // just for debug
         Assistant assistant2 = new Assistant("Lena");
+        fabrique.setAssistants(new ArrayList<>(List.of(assistant1,assistant2)));
         try {
             Thread fabriqueThread = new Thread(fabrique);
-            Thread assistant1Thread = new Thread(assistant1);
-            Thread assistant2Thread = new Thread(assistant2);
             fabriqueThread.start();
-            assistant1Thread.start();
-            assistant2Thread.start();
             fabriqueThread.join();
-            assistant1Thread.join();
-            assistant2Thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

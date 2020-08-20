@@ -1,7 +1,7 @@
 package by.htp.ahremenko.task51.domain;
 
 import by.htp.ahremenko.task51.service.RobotFabriqueSimulationService;
-import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -17,7 +17,7 @@ public class Fabrique implements Runnable {
     private final Random random = new Random();
     private Queue<Part> enabledParts = new LinkedList<>();
 
-    @Getter
+    @Setter
     private List<Assistant> assistants = new ArrayList<>();
 
     {
@@ -45,7 +45,7 @@ public class Fabrique implements Runnable {
         return localInstance;
     }
 
-    public List<Part> generateParts(int amountToGenerate) {
+    private List<Part> generateParts(int amountToGenerate) {
         List<Part> result = new ArrayList<>();
         for (int i = 0; i < amountToGenerate; i++) {
             result.add(getRandomPart());
@@ -71,6 +71,7 @@ public class Fabrique implements Runnable {
     public void run() {
         for (int i = 0; i < RobotFabriqueSimulationService.MAX_PERIODS; i++) {
             enabledParts.addAll(generateParts(random.nextInt(RobotFabriqueSimulationService.MAX_GENERATED_PARTS) + 1));
+            assistants.forEach( assistant -> assistant.gatherAndTry(gatherParts(random.nextInt(RobotFabriqueSimulationService.MAX_GENERATED_PARTS) + 1)));
             //System.out.println("Enabled parts " + enabledParts.size() + ": " + enabledParts);
             sleep(RobotFabriqueSimulationService.NIGHT_DURATION_MS);
         }
