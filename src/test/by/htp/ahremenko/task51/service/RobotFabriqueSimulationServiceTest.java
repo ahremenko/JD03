@@ -40,8 +40,8 @@ public class RobotFabriqueSimulationServiceTest extends TestCase {
     }
 
     public void testHandle() {
-        Integer actual = RobotFabriqueSimulationService.handle();
-        System.out.println("actual = " + actual);
+        String actual = RobotFabriqueSimulationService.handle();
+        System.out.println("actual: " + actual);
         assertNotNull(actual);
     }
 }

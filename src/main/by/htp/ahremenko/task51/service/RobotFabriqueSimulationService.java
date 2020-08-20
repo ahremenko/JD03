@@ -2,32 +2,59 @@ package by.htp.ahremenko.task51.service;
 
 import by.htp.ahremenko.task51.domain.*;
 
+/**
+ * 5.1 Фабрика роботов
+ * Двое безумных учёных устроили соревнование, кто из них соберёт больше роботов за 100 ночей.
+ *
+ * Для этого каждую ночь каждый из них отправляет своего прислужника на свалку фабрики роботов за деталями. Чтобы собрать одного робота им нужно:
+ *
+ * Голова, Тело, Левая рука, Правая рука, Левая нога, Правая, Нога, CPU, RAM, HDD.
+ *
+ * В первую ночь на свалке находится 20 случайных деталей.
+ *
+ * Каждую ночь фабрика выбрасывает на свалку от 1 до 4 случайных деталей.
+ *
+ * В то же самое время прислужники обоих учёных отправляются на свалку, и каждый собирает от 1 до 4 случайных деталей. Если на свалке деталей нет – прислужник уходит ни с чем. Затем они возвращаются домой и отдают детали хозяевам.
+ *
+ * Учёные пытаются собрать как можно больше роботов из деталей, которые они получили.
+ *
+ *
+ *
+ * Задача - Написать программу, симулирующую этот процесс. Для симуляции принять, что каждая ночь наступает через 100мс. Фабрика и два прислужника действуют в одно и то же время.
+ *
+ * После 100 ночей (около 10 секунд) определить победителя соревнования.
+ *
+ * Примечание: при решение данной задачи использовать только стандартные средства языка (нельзя использовать классы из пакета java.util.concurrent).7
+ */
 public class RobotFabriqueSimulationService {
 
     public static final int MAX_GENERATED_PARTS = 4;
-    public static final int MAX_PERIODS = 10;
+    public static final int MAX_PERIODS = 100;
     public static final int INITIAL_PARTS = 20;
     public static final int NIGHT_DURATION_MS = 100;
 
-    public static int handle() {
-
+    public static String handle() {
         Fabrique fabrique = Fabrique.getInstance();
         Assistant assistant1 = new Assistant("Vasya");
         Assistant assistant2 = new Assistant("Lena");
-        //for (int i = 0; i < RobotFabriqueSimulationService.MAX_PERIODS; i++) {
-        new Thread(fabrique).start();
-        //Thread assistant1Tread = new Thread(assistant1);
-        //Thread assistant2Tread = new Thread(assistant2);
-        //try {
-
-            //fabriqueTread.start();
-            //assistant1Tread.start();
-            //assistant2Tread.start();
-            //        Thread.sleep(RobotFabriqueSimulationService.NIGHT_DURATION_MS);
-        //} catch (InterruptedException e) {
-        //    e.printStackTrace();
-        //}
-        //}
-        return Math.max(assistant1.getAmountFinishedRobots(), assistant2.getAmountFinishedRobots());
+        try {
+            Thread fabriqueThread = new Thread(fabrique);
+            Thread assistant1Thread = new Thread(assistant1);
+            Thread assistant2Thread = new Thread(assistant2);
+            fabriqueThread.start();
+            assistant1Thread.start();
+            assistant2Thread.start();
+            fabriqueThread.join();
+            assistant1Thread.join();
+            assistant2Thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (assistant1.getAmountFinishedRobots() > assistant2.getAmountFinishedRobots()) {
+            return assistant1.getAssistantName() + "(" + assistant1.getAmountFinishedRobots() + ">" + assistant2.getAmountFinishedRobots() + ")";
+        } else if (assistant1.getAmountFinishedRobots() < assistant2.getAmountFinishedRobots()) {
+            return assistant2.getAssistantName() + "(" + assistant2.getAmountFinishedRobots() + ">" + assistant1.getAmountFinishedRobots() + ")";
+        }
+        return "no WINNER";
     }
 }

@@ -10,21 +10,25 @@ public class Robot implements Robotable {
 
     @Override
     public boolean isPartSuitable(@NonNull Part part) {
-        if (parts.containsKey(part.getName())) {
-            return false;
-        }
-        return true;
+        return parts.containsKey(part.getName()) ? false : true;
     }
 
     @Override
     public void addPart(@NonNull Part part) {
-        if (isPartSuitable(part)){
+        if (isPartSuitable(part)) {
             parts.put(part.getName(), part);
         }
     }
 
     @Override
     public boolean isReady() {
-         return (parts.size() == BodyType.values().length + HardwareType.values().length);
+        return (parts.size() == BodyType.values().length + HardwareType.values().length);
+    }
+
+    @Override
+    public String toString() {
+        return "Robot{" +
+                "parts=" + parts +
+                '}';
     }
 }

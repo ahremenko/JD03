@@ -8,6 +8,6 @@ public abstract class Part {
 
     @Override
     public String toString() {
-        return super.toString() + " " + this.name;
+        return "$" + this.name + "$";
     }
 }

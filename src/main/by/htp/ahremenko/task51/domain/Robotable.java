@@ -6,5 +6,4 @@ public interface Robotable {
     void addPart(Part part);
 
     boolean isReady();
-
 }
