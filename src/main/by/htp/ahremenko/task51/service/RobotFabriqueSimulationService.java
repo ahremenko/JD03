@@ -55,6 +55,6 @@ public class RobotFabriqueSimulationService {
         } else if (assistant1.getAmountFinishedRobots() < assistant2.getAmountFinishedRobots()) {
             return assistant2.getAssistantName() + "(" + assistant2.getAmountFinishedRobots() + ">" + assistant1.getAmountFinishedRobots() + ")";
         }
-        return "no WINNER";
+        return "No WINNER!";
     }
 }

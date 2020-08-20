@@ -4,9 +4,9 @@ import by.htp.ahremenko.task51.service.RobotFabriqueSimulationService;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
-import java.util.concurrent.CopyOnWriteArrayList;
-
+import java.util.ArrayList;
 
 public class Assistant implements Runnable {
     @Getter
@@ -14,26 +14,28 @@ public class Assistant implements Runnable {
 
     private final Random random = new Random();
 
-    private volatile List<Part> parts = new CopyOnWriteArrayList<>();
+    private List<Part> parts = new ArrayList<>();
 
     private Robot robotInProcess = new Robot();
 
-    private volatile List<Robot> robotsFinished = new CopyOnWriteArrayList<>();
+    private List<Robot> robotsFinished = new ArrayList<>();
 
     public Assistant(String name) {
         this.assistantName = name;
     }
 
-    public synchronized void addParts(List<Part> newParts) {
+    public void addParts(List<Part> newParts) {
         parts.addAll(newParts);
         System.out.println("Assistant [" + assistantName + "] gathered " + newParts.size() + " parts: " + newParts);
     }
 
-    public synchronized void tryToMakeRobots() {
-        for (Part part : parts) {
+    public void tryToMakeRobots() {
+        ListIterator<Part> iterator = parts.listIterator();
+        while (iterator.hasNext()) {
+            Part part = iterator.next();
             if (robotInProcess.isPartSuitable(part)) {
                 robotInProcess.addPart(part);
-                parts.remove(part);
+                iterator.remove();
             }
         }
         if (robotInProcess.isReady()) {
