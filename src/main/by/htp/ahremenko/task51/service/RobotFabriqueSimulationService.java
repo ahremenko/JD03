@@ -1,6 +1,7 @@
 package by.htp.ahremenko.task51.service;
 
-import by.htp.ahremenko.task51.domain.*;
+import by.htp.ahremenko.task51.domain.Fabrique;
+import by.htp.ahremenko.task51.domain.Assistant;
 
 /**
  * 5.1 Фабрика роботов

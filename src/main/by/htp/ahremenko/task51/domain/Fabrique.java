@@ -15,7 +15,7 @@ public class Fabrique implements Runnable {
 
     private List<Part> allParts = new ArrayList<>();
     private final Random random = new Random();
-    private volatile Queue<Part> enabledParts = new LinkedList<>();
+    private Queue<Part> enabledParts = new LinkedList<>();
 
     @Getter
     private List<Assistant> assistants = new ArrayList<>();
