@@ -12,10 +12,12 @@ public class Fabrique implements Runnable {
     private List<Part> allParts;
     private List<Part> enabledParts = new ArrayList<>();
 
-    {
-        allParts = Arrays.stream(BodyType.values()).map(BodyPart::new).collect(Collectors.toList());
-        allParts.addAll(Arrays.stream(HardwareType.values()).map(HardwarePart::new).collect(Collectors.toList()));
-        enabledParts.addAll(generateParts(RobotFabriqueSimulationService.INITIAL_PARTS));
+    public Fabrique() {
+        initialize();
+    }
+
+    public static Fabrique getInstance() {
+        return instance;
     }
 
     @Override
@@ -28,8 +30,10 @@ public class Fabrique implements Runnable {
         }
     }
 
-    public static Fabrique getInstance() {
-        return instance;
+    private void initialize() {
+        allParts = Arrays.stream(BodyType.values()).map(BodyPart::new).collect(Collectors.toList());
+        allParts.addAll(Arrays.stream(HardwareType.values()).map(HardwarePart::new).collect(Collectors.toList()));
+        enabledParts.addAll(generateParts(RobotFabriqueSimulationService.INITIAL_PARTS));
     }
 
     private List<Part> generateParts(int amountToGenerate) {
