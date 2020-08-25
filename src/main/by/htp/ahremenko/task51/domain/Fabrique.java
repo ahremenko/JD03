@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 public class Fabrique implements Runnable {
 
     private static final Fabrique instance = new Fabrique();
-    private List<Part> allParts;
     private final Random random = new Random();
+    private List<Part> allParts;
     private List<Part> enabledParts = new ArrayList<>();
 
     {
