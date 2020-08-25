@@ -1,22 +1,24 @@
 package by.htp.ahremenko.task51.domain;
 
 import lombok.NonNull;
+import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@ToString(callSuper = false)
 public class Robot implements Robotable {
-    private Map<String, Part> parts = new HashMap<>();
+    private Map<Typable, Part> parts = new HashMap<>();
 
     @Override
     public boolean isPartSuitable(@NonNull Part part) {
-        return parts.containsKey(part.getName()) ? false : true;
+        return !parts.containsKey(part.getPartType());
     }
 
     @Override
     public void addPart(@NonNull Part part) {
         if (isPartSuitable(part)) {
-            parts.put(part.getName(), part);
+            parts.put(part.getPartType(), part);
         }
     }
 
@@ -25,10 +27,10 @@ public class Robot implements Robotable {
         return (parts.size() == BodyType.values().length + HardwareType.values().length);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Robot{" +
                 "parts=" + parts +
                 '}';
-    }
+    }*/
 }

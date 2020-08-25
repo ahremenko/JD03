@@ -2,14 +2,11 @@ package by.htp.ahremenko.task51.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString(callSuper = false)
 public abstract class Part {
     @Getter
     @Setter
-    private String name;
-
-    @Override
-    public String toString() {
-        return "[" + this.name + "]";
-    }
+    private Typable partType;
 }
