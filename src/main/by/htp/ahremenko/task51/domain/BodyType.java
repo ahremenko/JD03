@@ -1,6 +1,6 @@
 package by.htp.ahremenko.task51.domain;
 
-public enum BodyType {
+public enum BodyType implements Typable {
     HEAD,
     LEFT_FOOT,
     RIGHT_FOOT,

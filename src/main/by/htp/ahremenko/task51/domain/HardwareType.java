@@ -1,6 +1,6 @@
 package by.htp.ahremenko.task51.domain;
 
-public enum HardwareType {
+public enum HardwareType implements Typable {
     HDD,
     CPU,
     RAM

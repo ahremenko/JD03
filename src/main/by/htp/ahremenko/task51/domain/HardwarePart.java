@@ -5,6 +5,6 @@ public class HardwarePart extends Part {
 
     public HardwarePart(HardwareType type) {
         this.partType = type;
-        name = type.name();
+        setName(type.name());
     }
 }

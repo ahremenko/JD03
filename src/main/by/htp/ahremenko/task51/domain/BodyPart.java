@@ -5,6 +5,6 @@ public class BodyPart extends Part {
 
     public BodyPart(BodyType type) {
         this.partType = type;
-        name = type.name();
+        setName(type.name());
     }
 }

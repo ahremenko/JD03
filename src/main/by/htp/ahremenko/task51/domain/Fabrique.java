@@ -1,48 +1,35 @@
 package by.htp.ahremenko.task51.domain;
 
 import by.htp.ahremenko.task51.service.RobotFabriqueSimulationService;
-import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Fabrique implements Runnable {
 
-    private static volatile Fabrique instance;
-
-    private List<Part> allParts = new ArrayList<>();
+    private static final Fabrique instance = new Fabrique();
+    private List<Part> allParts;
     private final Random random = new Random();
-    private Queue<Part> enabledParts = new LinkedList<>();
-
-    @Setter
-    private List<Assistant> assistants = new ArrayList<>();
+    private List<Part> enabledParts = new ArrayList<>();
 
     {
-        BodyType[] bodyPartTypes = BodyType.values();
-        for (int i = 0; i < bodyPartTypes.length; i++) {
-            allParts.add(new BodyPart(bodyPartTypes[i]));
-        }
-        HardwareType[] hardwareTypes = HardwareType.values();
-        for (int i = 0; i < hardwareTypes.length; i++) {
-            allParts.add(new HardwarePart(hardwareTypes[i]));
-        }
+        allParts = Arrays.stream(BodyType.values()).map(BodyPart::new).collect(Collectors.toList());
+        allParts.addAll(Arrays.stream(HardwareType.values()).map(HardwarePart::new).collect(Collectors.toList()));
         enabledParts.addAll(generateParts(RobotFabriqueSimulationService.INITIAL_PARTS));
     }
 
-    public static Fabrique getInstance() {
-        Fabrique localInstance = instance;
-        if (localInstance == null) {
-            synchronized (Fabrique.class) {
-                localInstance = instance;
-                if (localInstance == null) {
-                    instance = localInstance = new Fabrique();
-                }
+    @Override
+    public void run() {
+        for (int i = 0; i < RobotFabriqueSimulationService.MAX_PERIODS; i++) {
+            synchronized (enabledParts) {
+                enabledParts.addAll(generateParts(random.nextInt(RobotFabriqueSimulationService.MAX_GENERATED_PARTS) + 1));
             }
+            sleep(RobotFabriqueSimulationService.NIGHT_DURATION_MS);
         }
-        return localInstance;
+    }
+
+    public static Fabrique getInstance() {
+        return instance;
     }
 
     private List<Part> generateParts(int amountToGenerate) {
@@ -50,7 +37,7 @@ public class Fabrique implements Runnable {
         for (int i = 0; i < amountToGenerate; i++) {
             result.add(getRandomPart());
         }
-        System.out.println("Fabrique generates " + result + " parts " + "(" + result.size() + ")");
+        System.out.println("Fabrique generates: " + result + ". Amount: " + result.size() + " parts,");
         return result;
     }
 
@@ -58,31 +45,43 @@ public class Fabrique implements Runnable {
         return allParts.get(random.nextInt(allParts.size()));
     }
 
-    public synchronized List<Part> gatherParts(int count) {
+    public List<Part> gatherParts(int count) {
         List<Part> result = new ArrayList<>();
-        int avialableParts = Math.min(enabledParts.size(), count);
-        for (int i = 0; i < avialableParts; i++) {
-            result.add(enabledParts.remove());
+        int size = enabledParts.size();
+        if (size == 0) {
+            return result;
+        }
+        if (size <= count) {
+            synchronized (enabledParts) {
+                result.addAll(enabledParts.stream().collect(Collectors.toList()));
+                enabledParts.clear();
+            }
+        } else {
+            int i = 0;
+            synchronized (enabledParts) {
+                while (i < count) {
+                    size = enabledParts.size();
+                    if (size == 0) {
+                        break;
+                    }
+                    int j = 0;
+                    if (size > 1) {
+                        j = random.nextInt(size - 1);
+                    }
+                    result.add(enabledParts.get(j));
+                    enabledParts.remove(j);
+                    i++;
+                }
+            }
         }
         return result;
     }
 
-    @Override
-    public void run() {
-        for (int i = 0; i < RobotFabriqueSimulationService.MAX_PERIODS; i++) {
-            enabledParts.addAll(generateParts(random.nextInt(RobotFabriqueSimulationService.MAX_GENERATED_PARTS) + 1));
-            assistants.forEach( assistant -> assistant.gatherAndTry(gatherParts(random.nextInt(RobotFabriqueSimulationService.MAX_GENERATED_PARTS) + 1)));
-            //System.out.println("Enabled parts " + enabledParts.size() + ": " + enabledParts);
-            sleep(RobotFabriqueSimulationService.NIGHT_DURATION_MS);
-        }
-    }
-
-    private void sleep(long ms) {
+    public void sleep(long ms) {
         try {
             Thread.sleep(ms);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
 }

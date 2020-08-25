@@ -41,13 +41,19 @@ public class RobotFabriqueSimulationService {
     public static String handle() {
         Fabrique fabrique = Fabrique.getInstance();
 
-        Assistant assistant1 = new Assistant("Vasya");  // just for debug
-        Assistant assistant2 = new Assistant("Lena");
-        fabrique.setAssistants(new ArrayList<>(List.of(assistant1,assistant2)));
+        Assistant assistant1 = new Assistant("Vasya", fabrique);  // just for debug
+        Assistant assistant2 = new Assistant("Lena", fabrique);
+
         try {
             Thread fabriqueThread = new Thread(fabrique);
             fabriqueThread.start();
+            Thread assistant1Thread = new Thread(assistant1);
+            assistant1Thread.start();
+            Thread assistant2Thread = new Thread(assistant2);
+            assistant2Thread.start();
             fabriqueThread.join();
+            assistant1Thread.join();
+            assistant2Thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
